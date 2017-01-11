@@ -1,6 +1,16 @@
 " Settings
 " ========
 
+" Make sure that all the features of VIM can be used. Compatible mode means
+" compatible with vi.
+set nocompatible
+
+" Execute Tim Pope's plugin manager called Pathogen
+execute pathogen#infect()
+
+" Allow plugins to be loaded
+filetype plugin indent on
+
 " Row numbers
 set number
 
@@ -16,10 +26,6 @@ set textwidth=80
 " Configure search path to find files from current directory
 set path+=,**
 
-" Allow plugins to be loaded
-set nocompatible
-filetype plugin on
-
 
 " Remappings
 " ==========
@@ -28,4 +34,7 @@ filetype plugin on
 " prompt, it automatically expands to the path of the active buffer just as
 " though we had typed %:h<Tab>.
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
 
