@@ -5,11 +5,11 @@
 " compatible with vi.
 set nocompatible
 
-" Execute Tim Pope's plugin manager called Pathogen
-execute pathogen#infect()
-
 " Allow plugins to be loaded
 filetype plugin indent on
+
+" Execute Tim Pope's plugin manager called Pathogen
+execute pathogen#infect()
 
 " Row numbers
 set number
@@ -26,6 +26,11 @@ set textwidth=80
 " Configure search path to find files from current directory
 set path+=,**
 
+" Insert space characters for tab
+set expandtab
+
+" Insert 4 spaces in place of tab
+set tabstop=4
 
 " Remappings
 " ==========
