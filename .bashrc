@@ -134,3 +134,11 @@ fi
 
 # added by Anaconda3 4.2.0 installer
 export PATH="/home/jlantl/anaconda3/bin:$PATH"
+
+# JGL - print any remaining todo items (lines starting with '.') from your todo list
+echo "Good Day!"
+echo ""
+echo "Here are positive reminders"
+echo "==========================="
+grep "^\." ~/jeremiah/repos/journal/mantras.txt
+
