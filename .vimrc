@@ -92,6 +92,6 @@ cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-" Write file and run python file by pressing <F5> from Insert mode
-imap <F5> <Esc>:w<CR>:!clear;python %<CR>
+" Write file and run python file by pressing <F5> from Normal mode
+nnoremap <F5> :w<CR>:!clear;python %<CR>
 
