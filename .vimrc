@@ -93,5 +93,5 @@ cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 nmap <leader>l :set list!<CR>
 
 " Write file and run python file by pressing <F5> from Normal mode
-nnoremap <F5> :w<CR>:!clear;python %<CR>
+nnoremap <F5> :w<CR>:!clear;python3 %<CR>
 
