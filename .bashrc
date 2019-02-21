@@ -135,6 +135,9 @@ fi
 # added by Anaconda3 4.2.0 installer
 export PATH="/home/jlantl/anaconda3/bin:$PATH"
 
+# set vi mode in Bash, starts in insert mode, ESC to normal mode
+set -o vi
+
 # JGL - print any remaining todo items (lines starting with '.') from your todo list
 echo "Good Day!"
 echo ""
