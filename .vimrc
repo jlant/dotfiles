@@ -24,7 +24,10 @@ Plugin 'nvie/vim-flake8'
 
 " End of plugins
 call vundle#end()
+
+" Vim built-in autocompletion, omnicompletion
 filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
  
 " Settings
 " ========
