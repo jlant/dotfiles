@@ -133,7 +133,7 @@ if ! shopt -oq posix; then
 fi
 
 # added by Anaconda3 4.2.0 installer
-export PATH="/home/jlantl/anaconda3/bin:$PATH"
+#export PATH="/home/jlantl/anaconda3/bin:$PATH"
 
 # set vi mode in Bash, starts in insert mode, ESC to normal mode
 set -o vi
