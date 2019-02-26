@@ -138,6 +138,10 @@ fi
 # set vi mode in Bash, starts in insert mode, ESC to normal mode
 set -o vi
 
+# JGL - add aliases for activating and deactivating python virtual environments
+alias ae='deactivate &> /dev/null; source ./venv/bin/activate'
+alias de='deactivate'
+
 # JGL - print any remaining todo items (lines starting with '.') from your todo list
 echo "Good Day!"
 echo ""
