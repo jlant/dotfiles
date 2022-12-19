@@ -1,42 +1,43 @@
-" Config
-" ======
-
-" Make sure that all the features of VIM can be used. Compatible mode means
-" compatible with vi.
-set nocompatible
-filetype off
-
+" =============================================================================
 " Plugins
-" =======
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" =============================================================================
+" Using Vim's built-in plugin manager
+" Created the following directories for the plugins
+" ~/.vim/pack/plugins/start - plugins automatically loaded when vim starts
+" ~/.vim/pack/plugins/opt - plugins loaded when you use command :packadd [plugin_name]
 
-" Let Vundle manage Vundle, required 
-" The following command installs plugins  :PluginInstall
-Plugin 'gmarik/Vundle.vim'
-
-" All plugins are added here (before call to vundle#end()
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
-
-" End of plugins
-call vundle#end()
-
-" Vim built-in autocompletion, omnicompletion
+" =============================================================================
+" General Settings
+"   For help on a setting run :help <setting>
+" =============================================================================
+syntax on
 filetype plugin indent on
+
+set autoindent
+set clipboard=unnamedplus
+set confirm
+set cursorline
+set encoding=utf-8
+set expandtab
+set fileformat=unix
+set hlsearch
+set incsearch
+set nocompatible
+set number
 set omnifunc=syntaxcomplete#Complete
- 
-" Settings
-" ========
+" set omnifunc=ale#completion#OmniFunc
+set path+=,**
+set relativenumber
+set showmatch
+set spelllang=en_us
+set wildmenu
 
-" Tell syntastic plugin to use flake8 checker
-let g:syntastic_python_checkers = ['flake8']
-
+" =============================================================================
+" Specific Settings
+"   - Python and Full Stack Development
+" =============================================================================
 " Python PEP8 indentation and settings
-au BufNewFile,BufRead *.py
+au BufNewFile,BufRead *.py,*.rst,*.md
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -57,44 +58,75 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Enable all Python syntax highlighting features
 let python_highlight_all = 1
-syntax on
 
-" UTF-8 support
-set encoding=utf-8
+" =============================================================================
+" Vim's builtin file explorer Netrw configurations
+"   :Explore
+" =============================================================================
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 3
+let g:netrw_winsize = 25
 
-" Row numbers
-set number
-
-" Cursorline
-set cursorline
-
-" Highlighted search
-set hls
-
-" Show the matching part of the pair for [] {} and ()
-set showmatch
-
-" Clipboard to accept copy and paste to and from vim
-set clipboard=unnamedplus
-
-" Text width limit - to format the entire file, type gg then gqG
-"set textwidth=90
-
-" Configure search path to find files from current directory
-set path+=,**
-
-
-" Remappings
-" ==========
-
-" Easy expansion of the active file directory - type %% on Vim's command-line
-" prompt, it automatically expands to the path of the active buffer just as
-" though we had typed %:h<Tab>.
-cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+" =============================================================================
+" Remappings and Abbreviations
+" =============================================================================
+" Add a blank line above and below current line
+" https://superuser.com/questions/607163/inserting-a-blank-line-in-vim
+nnoremap <silent> ]<Space> :<C-u>put =repeat(nr2char(10),v:count)<Bar>execute "'[-1"<CR>
+nnoremap <silent> [<Space> :<C-u>put!=repeat(nr2char(10),v:count)<Bar>execute "']+1"<CR>
 
 " Write file and run python file by pressing <F5> from Normal mode
 nnoremap <F5> :w<CR>:!clear;python3 %<CR>
 
+" Abbreviation for bash shebang
+abbr _bash #!/bin/env bash<CR>
+
+" =============================================================================
+" Settings specific for plugins
+" =============================================================================
+" lightline.vim
+" -------------
+"   - Make sure status line shows all info
+"   - Add colored statusline
+"   - Add solarized light colored statusline
+set laststatus=2
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+
+" ALE
+" ---
+"   - Add fixers
+"   - Enable automatic fixing
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black', 'isort'],
+\}
+
+let g:ale_fix_on_save = 1
+
+" Goyo + Limelight
+" ----------------
+"   - Add color for Limelight
+"   - Set automatic commands to toggle Limelight on and off Goyo
+let g:limelight_conceal_ctermfg = 'gray'
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+" Solarized colorscheme
+" ---------------------
+"   - https://github.com/altercation/vim-colors-solarized
+set background=dark
+colorscheme solarized
+
+" =============================================================================
+" Other
+"   - Highlighting for spelling mistakes comes after colorscheme setting
+" =============================================================================
+highlight SpellBad cterm=underline ctermfg=darkred guifg=darkred
+highlight SpellLocal cterm=underline ctermfg=darkred guifg=darkred
+highlight SpellRare cterm=underline ctermfg=darkred guifg=darkred
+highlight SpellCap cterm=underline ctermfg=darkred guifg=darkred
